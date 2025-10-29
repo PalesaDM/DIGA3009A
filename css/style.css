@@ -1,0 +1,30 @@
+:root {
+--bg: #F2FFD9;
+--card: #F8C7CC;
+--text: #000;
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Open Sans' , sans-serif;
+    color: var(--text);
+    margin: 0;
+}
+
+.container { width: 90%; margin: auto; padding: 1rem 0; }
+
+.hero { text-align: center; padding: 2rem 0; }
+.hero input { padding: 0.6rem; width: 60%; border-radius: 8px; border: 2px solid #000; }
+.hero button { padding: 0.6rem 1rem; background: var(--card); border: none; border-radius: 8px; cursor: pointer; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+
+.card {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card img { width: 100%; border-radius: 10px; }
