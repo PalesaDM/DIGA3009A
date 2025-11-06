@@ -4,6 +4,12 @@
 --text: #000;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
 body {
     background: var(--bg);
     font-family: 'Open Sans' , sans-serif;
@@ -11,9 +17,23 @@ body {
     margin: 0;
 }
 
+main {
+    flex: 1;
+    padding-bottom: 2rem;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 1rem 0;
+}
+
+footer {
+    margin-top: auto;
+}
 .container { width: 90%; margin: auto; padding: 1rem 0; }
 
-.navvar {
+.navbar {
     background: var(--card);
     display: flex;
     justify-content: center;
@@ -43,6 +63,40 @@ body {
         flex-direction: column;
         gap: 1rem;
     }
+}
+/* ------------------------------
+   FOOTER STYLES
+--------------------------------*/
+footer {
+  background: var(--card);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  margin-top: 2rem;
+  border-top: 3px solid #000;
+}
+
+footer p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+
+footer p::before {
+  content: "🍳 ";
+}
+
+footer p::after {
+  content: " 🍴";
+}
+
+/* Slight darkening on hover for fun */
+footer:hover {
+  background: #f5b8bd;
+  transition: background 0.3s ease;
+}
+
 }
 .hero { text-align: center; padding: 2rem 0; }
 .hero input { padding: 0.6rem; width: 60%; border-radius: 8px; border: 2px solid #000; }
