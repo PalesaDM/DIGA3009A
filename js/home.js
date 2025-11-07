@@ -21,4 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   gsap.from(".card", {opacity: 0, y: 30, duration: 0.6, stagger: 0.2});
+  gsap.from(".hero h1", {opacity: 0, y: -20, duration: 0.5, ease: "power1.out"});
+  gsap.from(".hero form", {opacity: 0, y: 20, duration: 0.5, delay: 0.3, ease: "power1.out"});
 });
