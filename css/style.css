@@ -235,3 +235,47 @@ footer:hover {
 .card:hover img {
   transform: scale(1.05);
 }
+
+.tag {
+    background: var(--highlight);
+    color:#fff;
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: -0.5rem;
+}
+
+/* ------------------------------
+   CATEGORY FILTER BAR
+--------------------------------*/
+.category-bar {
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  margin: 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background: var(--highlight);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--highlight);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
