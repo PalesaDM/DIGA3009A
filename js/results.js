@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(apiUrl)
     .then(res => res.json())
     .then(data => {
-      console.log(data.results); // ✅ Check data in console
+      console.log("Fetched recipes:", data.results); 
 
       if (!data.results || data.results.length === 0) {
         resultsContainer.innerHTML = "<p>No recipes found. Try another keyword!</p>";
         return;
       }
 
-      resultsContainer.innerHTML = ""; // clear old results
+      resultsContainer.innerHTML = ""; 
 
       // Create recipe cards
       data.results.forEach(recipe => {
@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `
           <img src="${recipe.image}" alt="${recipe.title}">
           <h3>${recipe.title}</h3>
+          <button class="view-btn" onclick="location.href='recipe.html?id=${recipe.id}'">
+          View Recipe
+          </button>
         `;
         resultsContainer.appendChild(card);
       });
@@ -43,6 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
           duration: 0.7,
           ease: "power2.out"
         });
+
+        document.querySelectorAll('.card').forEach(card =>{
+          card.addEventListener('mouseenter', () => {
+            gsap.to(card, { borderColor: "#C65D2C", duration: 0.4})
+          });
+          card.addEventListener('mouseleave', () => {
+            gsap.to(card, { borderColor: "#D4B59E", duration: 0.4})
+          });
+        })
 
         // Subtle accent border colour pulse
         gsap.to(".card", {

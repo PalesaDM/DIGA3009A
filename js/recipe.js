@@ -45,6 +45,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       gsap.from(".recipe-card", { opacity: 0, y: 50, duration: 0.7, ease: "power2.out" });
       gsap.from(".recipe-card h1", { opacity: 0, y: -20, duration: 0.5, delay: 0.2 });
       gsap.from(".recipe-card li", { opacity: 0, x: -20, duration: 0.3, stagger: 0.05, delay: 0.4 });
+      gsap.from(".back-btn", {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        delay: 0.8,
+        ease: "power2.out"
+      });
     }
 
   } catch (error) {

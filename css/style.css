@@ -171,3 +171,67 @@ footer:hover {
     transition: 0.3s ease;
     border-color: var(--highlight);
 }
+
+.view-button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3 ease, transform 0.2 ease;
+    margin-top: 1rem;
+}
+
+.view-btn:hover {
+    background: var(--highlight);
+    transform: translateY(-2px);
+}
+
+.back-btn {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border: 2px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover animation */
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  border-color: var(--accent);
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
