@@ -1,7 +1,7 @@
 // -----------------------------------------
 // GLOBAL CONSTANTS
 // -----------------------------------------
-const API_KEY = "9318949ba92e4cb6ba6155172ed55869"; // 🔑 Replace this with your real API key
+const API_KEY = "974620b6d5694125bf871f0f5837436a"; // 🔑 Replace this with your real API key
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
 // -----------------------------------------

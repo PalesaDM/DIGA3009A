@@ -145,31 +145,72 @@ footer:hover {
     outline-offset: 2px;
 }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+.container { width:90%; max-width: 1200px; margin: auto; }
 
-.card {
-    background: var(--card);
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    border: 1px solid var(--border);
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: stretch;
+  align-items: start;
 }
 
-.card img { 
-    width: 100%; 
-    border-radius: 10px; 
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 380px;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .card h3 {
-    color: var(--text);
-    margin-top: 0.5rem;
+  text-align: center;
+  font-size: 1.05rem;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.card .tag {
+  background: #6b3e26;
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+.card button {
+  align-self: center;
+  padding: 0.6rem 1.2rem;
+  background: #b85124;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.card button:hover {
+  background: #6b3e26;
+  transform: translateY(-2px);
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    transition: 0.3s ease;
-    border-color: var(--highlight);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
 }
 
 .view-button {
@@ -278,4 +319,109 @@ footer:hover {
   background: var(--highlight);
   color: #fff;
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* ------------------------------
+   FIXED RECIPE GRID & CARD LAYOUT
+--------------------------------*/
+#popularRecipes,
+#results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  align-items: stretch;
+  padding: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 1; /* ✅ Ensures cards are fully visible */
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--border);
+}
+
+.card h3 {
+  margin: 0.8rem;
+  font-size: 1.1rem;
+  color: var(--highlight);
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Buttons */
+.card button {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  margin: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.card button:hover {
+  background-color: var(--highlight);
+}
+
+/* ------------------------------
+   CATEGORY BAR (Centered)
+--------------------------------*/
+#categories {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#categories h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.category-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.filter-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: var(--highlight);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--highlight);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }

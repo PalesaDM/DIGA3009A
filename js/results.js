@@ -1,72 +1,47 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const query = params.get('query');
-  const resultsContainer = document.getElementById('results'); // ✅ matches your HTML ID
+  const resultsContainer = document.getElementById('results');
+  const API_KEY = "974620b6d5694125bf871f0f5837436a";
 
   if (!query) {
-    resultsContainer.innerHTML = "<p>No search term provided.</p>";
+    resultsContainer.innerHTML = "<p>Please enter a search term.</p>";
     return;
   }
 
-  const apiKey = "9318949ba92e4cb6ba6155172ed55869"; // Replace with your actual key
-  const apiUrl = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&number=12&apiKey=${apiKey}`;
+  resultsContainer.innerHTML = "<p>Loading recipes… 🥄</p>";
 
-  fetch(apiUrl)
-    .then(res => res.json())
-    .then(data => {
-      console.log("Fetched recipes:", data.results); 
+  try {
+    const url = `https://api.spoonacular.com/recipes/complexSearch?query=${encodeURIComponent(query)}&number=12&addRecipeInformation=true&apiKey=${API_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
 
-      if (!data.results || data.results.length === 0) {
-        resultsContainer.innerHTML = "<p>No recipes found. Try another keyword!</p>";
-        return;
-      }
+    if (!data.results || data.results.length === 0) {
+      resultsContainer.innerHTML = "<p>No recipes found. Try another search!</p>";
+      return;
+    }
 
-      resultsContainer.innerHTML = ""; 
+    resultsContainer.innerHTML = data.results.map(r => `
+      <div class="card">
+        <img src="${r.image}" alt="${r.title}">
+        <h3>${r.title}</h3>
+        <button onclick="location.href='recipe.html?id=${r.id}'">View Recipe</button>
+      </div>
+    `).join('');
 
-      // Create recipe cards
-      data.results.forEach(recipe => {
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-          <img src="${recipe.image}" alt="${recipe.title}">
-          <h3>${recipe.title}</h3>
-          <button class="view-btn" onclick="location.href='recipe.html?id=${recipe.id}'">
-          View Recipe
-          </button>
-        `;
-        resultsContainer.appendChild(card);
+    if (window.gsap) {
+      gsap.from(".card", {
+        opacity: 0,
+        scale: 0.95,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: "power1.out",
+        clearProps: "transform"
       });
+    }
 
-      // ✅ Animate cards with GSAP
-      if (typeof gsap !== "undefined") {
-        gsap.from(".card", {
-          opacity: 0,
-          y: 40,
-          stagger: 0.15,
-          duration: 0.7,
-          ease: "power2.out"
-        });
-
-        document.querySelectorAll('.card').forEach(card =>{
-          card.addEventListener('mouseenter', () => {
-            gsap.to(card, { borderColor: "#C65D2C", duration: 0.4})
-          });
-          card.addEventListener('mouseleave', () => {
-            gsap.to(card, { borderColor: "#D4B59E", duration: 0.4})
-          });
-        })
-
-        // Subtle accent border colour pulse
-        gsap.to(".card", {
-          borderColor: "#B85124",   // your terracotta accent
-          duration: 1.2,
-          repeat: 0,
-          ease: "sine.inOut"
-        });
-      }
-    })
-    .catch(error => {
-      console.error("Error fetching recipes:", error);
-      resultsContainer.innerHTML = "<p>Sorry, something went wrong loading recipes.</p>";
-    });
+  } catch (err) {
+    console.error("Error fetching recipes:", err);
+    resultsContainer.innerHTML = "<p>Sorry, could not load recipes right now.</p>";
+  }
 });
