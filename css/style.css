@@ -34,6 +34,7 @@ main {
 footer {
     margin-top: auto;
 }
+
 .container { width: 90%; margin: auto; padding: 1rem 0; }
 
 img {
@@ -42,9 +43,7 @@ img {
   object-fit: contain;
 }
 
-/* ------------------------------
-   NAVBAR STYLES
---------------------------------*/
+
 
 .navbar {
   display: flex;
@@ -72,7 +71,7 @@ img {
   transform: translateY(-2px);
 }
 
-/* Site name / logo */
+
 .nav-logo {
   width: 28px;
   height: 28px;
@@ -82,13 +81,13 @@ img {
 }
 
 
-/* Link container */
+
 .nav-links {
   display: flex;
   gap: 2rem;
 }
 
-/* Individual links */
+
 .nav-link {
   text-decoration: none;
   color: #fff;
@@ -98,13 +97,13 @@ img {
   transition: color 0.3s ease;
 }
 
-/* Hover and active effects */
+
 .nav-link:hover,
 .nav-link.active {
   color: #ffe9d6;
 }
 
-/* Highlight underline for hover and active */
+
 .nav-link::after {
   content: "";
   position: absolute;
@@ -160,9 +159,7 @@ img {
 }
 
 
-/* ------------------------------
-   FOOTER STYLES
---------------------------------*/
+
 footer {
   background: var(--accent);
   text-align: center;
@@ -188,7 +185,7 @@ footer p::after {
   content: " 🍴";
 }
 
-/* Slight darkening on hover for fun */
+
 footer:hover {
   background: var(--highlight);
   transition: background 0.3s ease;
@@ -241,36 +238,47 @@ footer:hover {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
-  justify-items: stretch;
-  align-items: start;
+  justify-items: center;
+  align-items: stretch;
+  padding: 2rem 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .card {
   background: #fff;
   border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 380px;
+  width: 100%;
+  max-width: 280px;
+  min-height: 400px;
 }
 
 .card img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 10px;
+  border-bottom: 3px solid var(--accent);
 }
 
 .card h3 {
-  text-align: center;
-  font-size: 1.05rem;
-  margin: 0.8rem 0 0.4rem;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  color: var(--text);
+  font-weight: 600;
+  padding: 0 0.5rem;
+  flex-grow: 1;
 }
+
 
 .card .tag {
   background: #6b3e26;
@@ -284,20 +292,22 @@ footer:hover {
 }
 
 .card button {
-  align-self: center;
-  padding: 0.6rem 1.2rem;
-  background: #b85124;
+  background: var(--accent);
   color: #fff;
   border: none;
+  padding: 0.7rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.3s ease, transform 0.3s ease;
+  font-size: 0.95rem;
+  margin: 1rem auto 1.5rem;
+  transition: all 0.3s ease;
+  width: 60%;
 }
 
 .card button:hover {
   background: #6b3e26;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .card:hover {
@@ -323,25 +333,6 @@ footer:hover {
     transform: translateY(-2px);
 }
 
-.back-btn {
-    background: transparent;
-    color: var(--accent);
-    border: 2px solid var(--accent);
-    border-radius: 8px;
-    padding: 0.5rem 1.2rem;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.back-btn:hover {
-    background: var(--accent);
-    color: #fff;
-    transform: translateY(-2px);
-}
-
 .card {
   background: var(--card);
   border-radius: 10px;
@@ -358,7 +349,7 @@ footer:hover {
   transition: transform 0.3s ease;
 }
 
-/* Hover animation */
+
 .card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 6px 14px rgba(0,0,0,0.15);
@@ -380,9 +371,7 @@ footer:hover {
     margin-top: -0.5rem;
 }
 
-/* ------------------------------
-   CATEGORY FILTER BAR
---------------------------------*/
+
 .category-bar {
   text-align: center;
   margin-top: 1.5rem;
@@ -413,69 +402,99 @@ footer:hover {
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* ------------------------------
-   FIXED RECIPE GRID & CARD LAYOUT
---------------------------------*/
+
 #popularRecipes,
 #results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem; /* Adds breathing room between cards */
   justify-items: center;
   align-items: stretch;
-  padding: 1rem;
+  padding: 2rem 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .card {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   max-width: 300px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  opacity: 1; /* ✅ Ensures cards are fully visible */
+  transition: all 0.3s ease;
+  text-align: center;
 }
 
 .card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--accent);
+  transition: transform 0.3s ease;
 }
 
 .card h3 {
-  margin: 0.8rem;
+  margin: 1rem 0;
   font-size: 1.1rem;
   color: var(--highlight);
+  font-weight: 600;
+  padding: 0 0.5rem;
+  min-height: 48px; 
 }
 
-.card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
 
-/* Card Buttons */
+
 .card button {
   background-color: var(--accent);
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 0.6rem 1.2rem;
-  margin: 0.6rem;
-  cursor: pointer;
+  border-radius: 10px;
+  padding: 0.7rem 1.2rem;
+  margin: 1rem auto 1.5rem;
   font-weight: 600;
-  transition: background 0.3s ease;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 70%;
+  transition: all 0.3s ease;
 }
 
 .card button:hover {
   background-color: var(--highlight);
+  transform: translateY(-3px);
 }
 
-/* ------------------------------
-   CATEGORY BAR (Centered)
---------------------------------*/
+
+.card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  border-color: var(--accent);
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) {
+  #popularRecipes,
+  #results {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 95%;
+  }
+}
+
 #categories {
   text-align: center;
   margin-bottom: 2rem;
@@ -518,14 +537,16 @@ footer:hover {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* ------------------------------
-   LOAD MORE BUTTON STYLES
---------------------------------*/
+
 .load-more-container {
   text-align: center;
   margin-top: 1.5rem;
 }
 
+#loadMoreBtn {
+    display: block;
+    margin: 2rem auto;
+}
 .load-more-btn {
   background: var(--accent);
   color: #fff;
@@ -552,29 +573,7 @@ footer:hover {
   box-shadow: none;
 }
 
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
 
-.download-btn {
-  background: var(--highlight);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.download-btn:hover {
-  background: var(--accent);
-  transform: translateY(-2px);
-}
 
 .contact-container {
     display: flex;
@@ -658,9 +657,7 @@ footer:hover {
   transform: translateY(-2px);
 }
 
-/* ------------------------------
-   SUBMIT BUTTON ENHANCEMENTS
---------------------------------*/
+
 .submit-btn {
   display: block;
   width: 100%;
@@ -677,14 +674,14 @@ footer:hover {
   overflow: hidden;
 }
 
-/* Subtle pulse hover effect */
+
 .submit-btn:hover {
   background: var(--highlight);
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Loader spinner */
+
 .submit-btn.loading::after {
   content: "";
   position: absolute;
@@ -699,12 +696,12 @@ footer:hover {
   transform: translate(-50%, -50%);
 }
 
-/* Hide text while loading */
+
 .submit-btn.loading span {
   visibility: hidden;
 }
 
-/* Loading animation */
+
 @keyframes spin {
   to {
     transform: translate(-50%, -50%) rotate(360deg);
@@ -728,9 +725,7 @@ footer:hover {
 .form-status {
     animation: fadeInOut 5s ease forwards;
 }
-/* ------------------------------
-   THANK YOU POPUP STYLES
---------------------------------*/
+
 .thank-you-popup {
   position: fixed;
   top: 0;
@@ -858,3 +853,140 @@ img.hero-image, .nav-logo {
     font-size: 0.9rem;
   }
 }
+.card {
+    opacity: 1 !important;
+}
+
+/* ------------------------------
+   RECIPE DETAIL PAGE FIXES
+--------------------------------*/
+.recipe-card {
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.recipe-title {
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--highlight);
+}
+
+.recipe-card h3 {
+  margin-top: 1.8rem;
+  color: var(--accent);
+  font-family: "Montserrat", sans-serif;
+}
+
+.recipe-card ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  transition: transform 0.3s ease;
+}
+
+.button-group:hover {
+  transform: translateY(-2px); 
+}
+
+.back-btn,
+.download-btn {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.5rem;
+  min-width: 180px;
+  height: 48px;
+  line-height: 1.2;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  box-sizing: border-box;
+}
+
+.back-btn {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.back-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.download-btn {
+  background: var(--accent);
+  color: #fff;
+  border: 2px solid var(--accent);
+}
+
+.download-btn:hover {
+  background: var(--highlight);
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .button-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .back-btn,
+  .download-btn {
+    width: 90%;
+    min-width: unset;
+    height: auto;
+  }
+}
+
+/* ------------------------------
+   FOOTER CREDIT / API LINK
+--------------------------------*/
+.api-credit {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-top: 0.4rem;
+  opacity: 0.9;
+}
+
+.api-credit a {
+  color: #ffe9d6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.api-credit a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+

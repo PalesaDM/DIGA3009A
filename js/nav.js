@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("site-header");
   const footer = document.getElementById("site-footer");
 
-  // ✅ Inject universal navbar
+  
   header.innerHTML = `
     <nav class="navbar">
       <div class="nav-left">
@@ -18,12 +18,18 @@ document.addEventListener("DOMContentLoaded", () => {
     </nav>
   `;
 
-  // ✅ Inject footer
-  footer.innerHTML = `
-    <p>&copy; ${new Date().getFullYear()}  WB Recipe Finder 🍴</p>
-  `;
+  
+  // Injects footer to all pages
+document.getElementById("site-footer").innerHTML = `
+  <footer>
+    <p>🍳 Wholesome Bites | © 2025</p>
+    <p class="api-credit">
+      Powered by <a href="https://www.themealdb.com/api.php" target="_blank" rel="noopener">TheMealDB API</a>
+    </p>
+  </footer>
+`;
 
-  // ✅ Highlight active page
+  
   const currentPage = window.location.pathname.split("/").pop();
   const links = document.querySelectorAll(".nav-link");
   links.forEach((link) => {
@@ -32,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ✅ Optional GSAP fade-in animation for navbar
+  
   if (typeof gsap !== "undefined") {
     gsap.from(".navbar", {
       opacity: 0,

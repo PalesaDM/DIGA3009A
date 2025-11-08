@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const query = params.get('query');
   const resultsContainer = document.getElementById('results');
 
-  // 🥗 TheMealDB base URL (no API key required)
+  
   const BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
 
   if (!query) {
@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   resultsContainer.innerHTML = "<p>Loading healthy recipes… 🥄</p>";
 
   try {
-    // 🍏 Only fetch recipes that sound healthy
-    // TheMealDB doesn't have a 'healthy' flag, so we filter by search term
+   
     const res = await fetch(`${BASE_URL}search.php?s=${encodeURIComponent(query)}`);
     const data = await res.json();
 
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    // 🍅 Filter meals with words like salad, chicken, vegetable, soup, etc.
+    // Filtering meals with words like salad, chicken, vegetable, soup, etc.
     const healthyMeals = data.meals.filter(m =>
       /(salad|chicken|soup|vegetable|grilled|fruit|yogurt|healthy|fish|low|bowl|smoothie)/i.test(m.strMeal)
     );
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    // 🎨 Render recipe cards
+    
     resultsContainer.innerHTML = healthyMeals.map(meal => `
       <div class="card">
         <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
@@ -43,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     `).join('');
 
-    // ✨ Keep your GSAP animation
+    
     if (window.gsap) {
       gsap.from(".card", {
         opacity: 0,

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    // 🥗 Extract ingredients dynamically
+
     const ingredients = [];
     for (let i = 1; i <= 20; i++) {
       const ingredient = recipe[`strIngredient${i}`];
@@ -30,12 +30,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
-    // 🧾 Clean instructions text
+    
     const cleanInstructions = recipe.strInstructions
       ? recipe.strInstructions.replace(/(\r\n|\r|\n)/g, "<br>")
       : "No instructions available.";
 
-    // 🖼️ Render recipe details
+    
     detailContainer.innerHTML = `
       <div class="recipe-card">
         <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" class="recipe-image">
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       </div>
     `;
 
-    // 🪄 GSAP Animations
+    // GSAP Animations
     if (typeof gsap !== "undefined") {
       gsap.from(".recipe-card", { opacity: 0, y: 50, duration: 0.7, ease: "power2.out" });
       gsap.from(".recipe-card h1", { opacity: 0, y: -20, duration: 0.5, delay: 0.2 });
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
 
-    // 📥 Download Recipe as PDF
+    
     if (typeof window.jspdf !== "undefined") {
       document.getElementById("downloadRecipeBtn").addEventListener("click", () => {
         const { jsPDF } = window.jspdf;

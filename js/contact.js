@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
   const status = document.getElementById("formStatus");
 
-  // ✅ Replace these with your EmailJS credentials
+  
   const SERVICE_ID = "service_4fhy71h";
   const TEMPLATE_ID = "template_98axtic";
   const PUBLIC_KEY = "WSEg5CQ8iNKyxc0pb";
 
-  // Initialize EmailJS
+  
   emailjs.init(PUBLIC_KEY);
 
-  // Animate in
+  // Animations
   if (typeof gsap !== "undefined") {
     gsap.from(".contact-section h1", { opacity: 0, y: -30, duration: 0.7 });
     gsap.from(".contact-intro", { opacity: 0, y: -15, duration: 0.6, delay: 0.2 });
@@ -43,14 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Show sending message
+
     status.textContent = "📨 Sending your message...";
     status.style.color = "#5b3a29";
     const submitButton = form.querySelector(".submit-btn");
     submitButton.classList.add("loading");
 
 
-    // Send via EmailJS
+
     emailjs
       .send(SERVICE_ID, TEMPLATE_ID, {
         from_name: name,
@@ -69,12 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
         status.style.color = "#b85124";
         submitButton.classList.remove("loading");
 
-        // ✅ Show Thank You popup
+        
      const popup = document.getElementById("thankYouPopup");
      popup.classList.remove("hidden");
     popup.classList.add("show");
 
-// Auto-hide after 3 seconds
+
   setTimeout(() => {
     popup.classList.remove("show");
     setTimeout(() => popup.classList.add("hidden"), 400);
