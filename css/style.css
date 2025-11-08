@@ -36,38 +36,85 @@ footer {
 }
 .container { width: 90%; margin: auto; padding: 1rem 0; }
 
+/* ------------------------------
+   NAVBAR STYLES
+--------------------------------*/
 .navbar {
-    background: var(--accent);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    padding: 1rem 0;
-    border-bottom: 3px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  border-bottom: 3px solid var(--border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.navbar a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    padding: 0.4rem 0.8rem;
-    border-radius: 10px;
+/* Site name / logo */
+.nav-logo {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: #fff;
+  letter-spacing: 0.5px;
 }
 
-.navbar a:hover {
-    background: var(--highlight);
-    color: #fff;
-    transform: translateY(-2px);
+/* Link container */
+.nav-links {
+  display: flex;
+  gap: 2rem;
 }
 
-@media (max-width: 600px) {
-    .navbar {
-        flex-direction: column;
-        gap: 1rem;
-    }
+/* Individual links */
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.05rem;
+  position: relative;
+  transition: color 0.3s ease;
 }
+
+/* Hover and active effects */
+.nav-link:hover,
+.nav-link.active {
+  color: #ffe9d6;
+}
+
+/* Highlight underline for hover and active */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background: #fff;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+
 /* ------------------------------
    FOOTER STYLES
 --------------------------------*/
@@ -482,4 +529,216 @@ footer:hover {
 .download-btn:hover {
   background: var(--accent);
   transform: translateY(-2px);
+}
+
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 80vh;
+    padding: 2rem 1rem 6rem;
+}
+
+.contact-section {
+    background: var(--card);
+    padding: 2rem 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.contact-section h1 {
+    text-align: center;
+    color: var(--highlight);
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 1rem;
+}
+
+.contact-intro {
+    text-align: center;
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.contact-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: var(--text);
+  background: #fff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 4px rgba(184, 81, 36, 0.3);
+}
+
+.submit-btn {
+  display: block;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: var(--highlight);
+  transform: translateY(-2px);
+}
+
+/* ------------------------------
+   SUBMIT BUTTON ENHANCEMENTS
+--------------------------------*/
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle pulse hover effect */
+.submit-btn:hover {
+  background: var(--highlight);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Loader spinner */
+.submit-btn.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 3px solid #fff;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translate(-50%, -50%);
+}
+
+/* Hide text while loading */
+.submit-btn.loading span {
+  visibility: hidden;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+
+.form-status {
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.form-status {
+    animation: fadeInOut 5s ease forwards;
+}
+/* ------------------------------
+   THANK YOU POPUP STYLES
+--------------------------------*/
+.thank-you-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.thank-you-popup.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup-content {
+  background: var(--card);
+  color: var(--text);
+  text-align: center;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(0.9);
+  transition: transform 0.4s ease;
+}
+
+.thank-you-popup.show .popup-content {
+  transform: scale(1);
+}
+
+.popup-icon {
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.popup-content h2 {
+  margin-bottom: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  color: var(--highlight);
+}
+
+.popup-content p {
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.hidden {
+  display: none;
 }
