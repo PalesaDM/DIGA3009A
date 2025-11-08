@@ -857,9 +857,7 @@ img.hero-image, .nav-logo {
     opacity: 1 !important;
 }
 
-/* ------------------------------
-   RECIPE DETAIL PAGE FIXES
---------------------------------*/
+
 .recipe-card {
   max-width: 800px;
   margin: 2rem auto;
@@ -968,9 +966,7 @@ img.hero-image, .nav-logo {
   }
 }
 
-/* ------------------------------
-   FOOTER CREDIT / API LINK
---------------------------------*/
+
 .api-credit {
   font-size: 0.9rem;
   color: #fff;
