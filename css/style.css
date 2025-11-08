@@ -425,3 +425,61 @@ footer:hover {
   color: #fff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
+
+/* ------------------------------
+   LOAD MORE BUTTON STYLES
+--------------------------------*/
+.load-more-container {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.load-more-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.load-more-btn:hover {
+  background: var(--highlight);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+.load-more-btn:disabled {
+  background: #c9b4a1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.download-btn {
+  background: var(--highlight);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
