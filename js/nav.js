@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ✅ Inject universal navbar
   header.innerHTML = `
     <nav class="navbar">
-      <div class="nav-logo">🍴 Recipe Finder</div>
+      <div class="nav-logo">🍴 Wholesome Bites 🌿</div>
       <div class="nav-links">
         <a href="./index.html" class="nav-link">Home</a>
         <a href="./results.html" class="nav-link">Recipes</a>
