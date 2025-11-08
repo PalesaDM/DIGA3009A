@@ -1,18 +1,26 @@
 // -----------------------------------------
-// GLOBAL CONSTANTS
+// BASE URL (No API key needed for TheMealDB)
 // -----------------------------------------
-const API_KEY = "974620b6d5694125bf871f0f5837436a"; // 🔑 Replace this with your real API key
-const BASE_URL = "https://api.spoonacular.com/recipes";
+const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
 
 // -----------------------------------------
-// FETCH RECIPES FUNCTION
+// FETCH HEALTHY RECIPES
 // -----------------------------------------
-async function fetchRecipes(query) {
+async function fetchRecipes(query = "salad") {
   try {
-    const res = await fetch(`${BASE_URL}/complexSearch?query=${query}&number=9&apiKey=${API_KEY}`);
+    // TheMealDB uses 'search.php?s=' instead of complexSearch
+    const res = await fetch(`${BASE_URL}/search.php?s=${encodeURIComponent(query)}`);
     const data = await res.json();
-    console.log("Fetched recipes:", data.results); // ✅ for debugging
-    return data.results || [];
+
+    if (!data.meals) return [];
+
+    // 🍏 Filter recipes by "healthy" keywords
+    const healthyMeals = data.meals.filter(m =>
+      /(salad|chicken|soup|fish|fruit|bowl|grilled|vegetable|smoothie|healthy|low)/i.test(m.strMeal)
+    );
+
+    console.log("Fetched healthy recipes:", healthyMeals);
+    return healthyMeals;
   } catch (error) {
     console.error("Error fetching recipes:", error);
     return [];
@@ -20,19 +28,19 @@ async function fetchRecipes(query) {
 }
 
 // -----------------------------------------
-// HOME PAGE SEARCH FORM HANDLER
+// SEARCH FORM HANDLER (Home Page)
 // -----------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("searchForm");
   const input = document.getElementById("searchInput");
 
-  // Only add event listener if the form exists (prevents errors on results.html)
   if (form && input) {
     form.addEventListener("submit", e => {
       e.preventDefault();
       const query = input.value.trim();
+
       if (query) {
-        // Redirect to results.html with query string
+        // Redirect to results page with query parameter
         window.location.href = `results.html?query=${encodeURIComponent(query)}`;
       } else {
         alert("Please enter a recipe name to search.");

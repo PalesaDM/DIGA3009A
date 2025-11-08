@@ -8,113 +8,119 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
+  const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
+
   try {
-    const res = await fetch(`${BASE_URL}/${id}/information?apiKey=${API_KEY}`);
+    const res = await fetch(`${BASE_URL}/lookup.php?i=${id}`);
     const data = await res.json();
+    const recipe = data.meals ? data.meals[0] : null;
 
-    console.log("Recipe details:", data); // ✅ Debug check
+    if (!recipe) {
+      detailContainer.innerHTML = "<p>Recipe not found.</p>";
+      return;
+    }
 
-    // Handle missing data safely
-    const ingredients = data.extendedIngredients
-      ? data.extendedIngredients.map(i => `<li>${i.original}</li>`).join('')
-      : "<li>No ingredients listed.</li>";
+    // 🥗 Extract ingredients dynamically
+    const ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = recipe[`strIngredient${i}`];
+      const measure = recipe[`strMeasure${i}`];
+      if (ingredient && ingredient.trim() !== "") {
+        ingredients.push(`${measure || ""} ${ingredient}`);
+      }
+    }
 
-    const instructions = data.instructions
-      ? data.instructions
+    // 🧾 Clean instructions text
+    const cleanInstructions = recipe.strInstructions
+      ? recipe.strInstructions.replace(/(\r\n|\r|\n)/g, "<br>")
       : "No instructions available.";
 
-    // Render recipe detail content
+    // 🖼️ Render recipe details
     detailContainer.innerHTML = `
       <div class="recipe-card">
-        <img src="${data.image}" alt="${data.title}" class="recipe-image">
-        <h1 class="recipe-title">${data.title}</h1>
-        <p><strong>Ready in:</strong> ${data.readyInMinutes} minutes</p>
+        <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}" class="recipe-image">
+        <h1 class="recipe-title">${recipe.strMeal}</h1>
+        <p><strong>Category:</strong> ${recipe.strCategory || "N/A"}</p>
+        <p><strong>Area:</strong> ${recipe.strArea || "N/A"}</p>
 
         <h3>Ingredients</h3>
-        <ul>${ingredients}</ul>
+        <ul>${ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
 
         <h3>Instructions</h3>
-        <p>${instructions}</p>
-        
+        <p>${cleanInstructions}</p>
+
+        <div class="button-group">
+          <button class="back-btn" onclick="history.back()">← Back to Results</button>
+          <button class="download-btn" id="downloadRecipeBtn">⬇️ Download Recipe</button>
+        </div>
       </div>
     `;
-    <div class="button-group">
-      <button class="back-btn" onclick="history.back()">← Back to Results</button>
-      <button class="download-btn" id="downloadRecipeBtn">⬇️ Download Recipe</button>
-    </div>
 
     // 🪄 GSAP Animations
     if (typeof gsap !== "undefined") {
       gsap.from(".recipe-card", { opacity: 0, y: 50, duration: 0.7, ease: "power2.out" });
       gsap.from(".recipe-card h1", { opacity: 0, y: -20, duration: 0.5, delay: 0.2 });
       gsap.from(".recipe-card li", { opacity: 0, x: -20, duration: 0.3, stagger: 0.05, delay: 0.4 });
-      gsap.from(".back-btn", {
+      gsap.from(".button-group button", {
         opacity: 0,
         y: 20,
         duration: 0.5,
         delay: 0.8,
+        stagger: 0.1,
         ease: "power2.out"
       });
+    }
 
-      // 🧾 Download Recipe as PDF
-if (typeof window.jspdf !== "undefined") {
-  document
-    .getElementById("downloadRecipeBtn")
-    .addEventListener("click", () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+    // 📥 Download Recipe as PDF
+    if (typeof window.jspdf !== "undefined") {
+      document.getElementById("downloadRecipeBtn").addEventListener("click", () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(18);
-      doc.text(data.title, 20, 20);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.text(recipe.strMeal, 20, 20);
 
-      doc.setDrawColor(184, 81, 36); // Accent
-      doc.line(20, 25, 190, 25);
+        doc.setDrawColor(184, 81, 36);
+        doc.line(20, 25, 190, 25);
 
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(12);
-      doc.text(`⏱ Ready in: ${data.readyInMinutes} minutes`, 20, 35);
-      doc.text(`🍽 Servings: ${data.servings || "N/A"}`, 20, 42);
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(12);
+        doc.text(`🍴 Category: ${recipe.strCategory || "N/A"}`, 20, 35);
+        doc.text(`🌍 Area: ${recipe.strArea || "N/A"}`, 20, 42);
 
-      doc.setFont("helvetica", "bold");
-      doc.setTextColor(91, 58, 41);
-      doc.text("Ingredients:", 20, 55);
+        doc.setFont("helvetica", "bold");
+        doc.text("Ingredients:", 20, 55);
+        doc.setFont("helvetica", "normal");
 
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(0, 0, 0);
-      let y = 62;
+        let y = 62;
+        ingredients.forEach((i) => {
+          doc.text(`• ${i}`, 25, y);
+          y += 7;
+          if (y > 270) {
+            doc.addPage();
+            y = 20;
+          }
+        });
 
-      (data.extendedIngredients || []).forEach((i) => {
-        doc.text(`• ${i.original}`, 25, y);
-        y += 7;
-        if (y > 270) {
-          doc.addPage();
-          y = 20;
-        }
+        y += 8;
+        doc.setFont("helvetica", "bold");
+        doc.text("Instructions:", 20, y);
+        y += 8;
+        doc.setFont("helvetica", "normal");
+
+        const cleanText = recipe.strInstructions
+          ? recipe.strInstructions.replace(/(\r\n|\r|\n)/g, " ")
+          : "No instructions available.";
+        const splitText = doc.splitTextToSize(cleanText, 170);
+        doc.text(splitText, 20, y);
+
+        doc.setFontSize(10);
+        doc.setTextColor(160, 126, 99);
+        doc.text("Generated by Wholesome Bites | © 2025", 20, 290);
+
+        doc.save(`${recipe.strMeal.replace(/\s+/g, "_")}.pdf`);
       });
-
-      y += 8;
-      doc.setFont("helvetica", "bold");
-      doc.setTextColor(91, 58, 41);
-      doc.text("Instructions:", 20, y);
-      y += 8;
-
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(0, 0, 0);
-      const instructions = data.instructions
-        ? data.instructions.replace(/(<([^>]+)>)/gi, "")
-        : "No instructions available.";
-      const splitText = doc.splitTextToSize(instructions, 170);
-      doc.text(splitText, 20, y);
-
-      doc.setFontSize(10);
-      doc.setTextColor(160, 126, 99);
-      doc.text("Generated by Recipe Finder | © 2025", 20, 290);
-
-      doc.save(`${data.title.replace(/\s+/g, "_")}.pdf`);
-    });
-}
-
     }
 
   } catch (error) {

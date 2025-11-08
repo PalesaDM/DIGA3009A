@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // ✅ Inject universal navbar
   header.innerHTML = `
     <nav class="navbar">
-      <div class="nav-logo">🍴 Wholesome Bites 🌿</div>
+      <div class="nav-left">
+  <img src="./assets/images/chef-hat.png" alt="Wholesome Bites Logo" class="nav-logo">
+  <span class="site-name">Wholesome Bites</span>
+</div>
+
       <div class="nav-links">
         <a href="./index.html" class="nav-link">Home</a>
         <a href="./results.html" class="nav-link">Recipes</a>
@@ -16,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ✅ Inject footer
   footer.innerHTML = `
-    <p>&copy; ${new Date().getFullYear()} Recipe Finder 🍴</p>
+    <p>&copy; ${new Date().getFullYear()}  WB Recipe Finder 🍴</p>
   `;
 
   // ✅ Highlight active page
